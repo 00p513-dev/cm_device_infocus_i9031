@@ -1,8 +1,8 @@
-TARGET_SPECIFIC_HEADER_PATH := device/moto/panelli/include
+TARGET_SPECIFIC_HEADER_PATH := device/infocus/if9031/include
 
-TARGET_BOARD_PLATFORM := mt6737m
+TARGET_BOARD_PLATFORM := mt6737h
 
-FORCE_32_BIT := true
+FORCE_32_BIT := false
 
 # Architecture
 ifeq ($(FORCE_32_BIT),true)
@@ -37,7 +37,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 4698144768
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # system proprities
-TARGET_SYSTEM_PROP += device/moto/panelli/system.prop
+TARGET_SYSTEM_PROP += device/infocus/if9031/system.prop
 
 # Camera
 USE_CAMERA_STUB := true
@@ -52,18 +52,23 @@ BOARD_USES_MTK_AUDIO := true
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
-BOARD_KERNEL_IMAGE_NAME := zImage-dtb
-TARGET_KERNEL_SOURCE := kernel/moto/panelli
-BOARD_KERNEL_BASE := 0x40000000
+# Kernel
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
+BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_RAMDISK_OFFSET := 0x04000000
-BOARD_TAGS_OFFSET := 0xE000000
-ARCH := arm
-TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_CONFIG := panelli_defconfig
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,32N2 androidboot.selinux=permissive androidboot.selinux=disabled
 BOARD_KERNEL_OFFSET := 0x00008000
-BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET)
+BOARD_RAMDISK_OFFSET := 0x03f88000
+BOARD_SECOND_OFFSET := 0x00e88000
+BOARD_KERNEL_TAGS_OFFSET := 0x0df88000
+BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/zImage-dtb
+BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_SOURCE := kernel/infocus/if9031
+TARGET_KERNEL_CONFIG := if9031_defconfig
 
 #GCC
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-linux-androideabi-4.9/bin
@@ -74,19 +79,19 @@ TARGET_USE_SDCLANG := false
 SDCLANG := false
 
 #bootloader
-TARGET_BOOTLOADER_BOARD_NAME := mt6737m
+TARGET_BOOTLOADER_BOARD_NAME := mt6737h
 
 # Assert
 #rip ported recoveries
-TARGET_OTA_ASSERT_DEVICE := Moto,"panelli",panelli,Moto_C,Moto C,C,Moto C Plus,Moto_C_plus
+TARGET_OTA_ASSERT_DEVICE := if9031
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 # BOARD_BLUETOOTH_BDROID_HCILP_INCLUDED := 0
 
 # CMHW
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS += device/moto/panelli/cmhw
+#BOARD_USES_CYANOGEN_HARDWARE := true
+#BOARD_HARDWARE_CLASS += device/moto/panelli/cmhw
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
@@ -123,7 +128,7 @@ BOARD_NO_SECURE_DISCARD := true
 TARGET_USERIMAGES_USE_EXT4 := true
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/moto/panelli/ril
+#BOARD_RIL_CLASS := ../../../device/moto/panelli/ril
 
 # SELinux
 ifeq ($(SELINUX_PERMISSIVE),true)
