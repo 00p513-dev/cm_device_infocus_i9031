@@ -1,11 +1,11 @@
 # Overlay
-DEVICE_PACKAGE_OVERLAYS += device/moto/panelli/overlay
+DEVICE_PACKAGE_OVERLAYS += device/infocus/philip/overlay
 
-DEVICE_PATH := device/moto/panelli
-LOCAL_PATH := device/moto/panelli
+DEVICE_PATH := device/infocus/philip
+LOCAL_PATH := device/infocus/philip
 
-$(call inherit-product, vendor/moto/panelli/panelli-vendor.mk)
-$(call inherit-product, device/moto/panelli/packages.mk)
+$(call inherit-product, vendor/infocus/philip/panelli-vendor.mk)
+$(call inherit-product, device/infocus/philip/packages.mk)
 
 # Dalvik/HWUI
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
