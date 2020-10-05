@@ -1,4 +1,4 @@
-TARGET_SPECIFIC_HEADER_PATH := device/infocus/if9031/include
+TARGET_SPECIFIC_HEADER_PATH := device/infocus/philip/include
 
 TARGET_BOARD_PLATFORM := mt6737h
 
@@ -37,13 +37,13 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 4698144768
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # system proprities
-TARGET_SYSTEM_PROP += device/infocus/if9031/system.prop
+TARGET_SYSTEM_PROP += device/infocus/philip/system.prop
 
 # Camera
 USE_CAMERA_STUB := true
 
 # FSTAB
-TARGET_RECOVERY_FSTAB := device/moto/panelli/rootdir/fstab.mt6735
+TARGET_RECOVERY_FSTAB := device/infocus/philip/rootdir/fstab.mt6735
 
 # Audio
 BOARD_USES_MTK_AUDIO := true
@@ -67,7 +67,7 @@ BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_SOURCE := kernel/infocus/if9031
+TARGET_KERNEL_SOURCE := kernel/infocus/philip
 TARGET_KERNEL_CONFIG := if9031_defconfig
 
 #GCC
@@ -83,7 +83,7 @@ TARGET_BOOTLOADER_BOARD_NAME := mt6737h
 
 # Assert
 #rip ported recoveries
-TARGET_OTA_ASSERT_DEVICE := if9031
+TARGET_OTA_ASSERT_DEVICE := philip
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -101,7 +101,7 @@ BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 WITH_DEXPREOPT := false
 
 # Display
-BOARD_EGL_CFG := /vendor/moto/panelli/proprietary/vendor/lib/egl/egl.cfg
+BOARD_EGL_CFG := /vendor/infocus/philip/proprietary/vendor/lib/egl/egl.cfg
 USE_OPENGL_RENDERER:=true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
@@ -134,8 +134,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 ifeq ($(SELINUX_PERMISSIVE),true)
 BOARD_KERNEL_CMDLINE +=  androidboot.selinux=permissive
 endif
-BOARD_SEPOLICY_DIRS := device/moto/panelli/sepolicy
-BOARD_SECCOMP_POLICY += device/moto/panelli/seccomp
+BOARD_SEPOLICY_DIRS := device/infocus/philip/sepolicy
+BOARD_SECCOMP_POLICY += device/infocus/philip/seccomp
 
 # Wireless
 BOARD_WLAN_DEVICE := MediaTek
